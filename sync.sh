@@ -6,6 +6,6 @@ cd wiki
 
 git fetch --quiet > /dev/null
 
-git pull > /dev/null
+git reset --hard origin/dev > /dev/null
 
 git rev-parse --short HEAD
