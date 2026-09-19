@@ -15,13 +15,13 @@ def reload(reason):
     with _lock:
         if _proc is not None and _proc.poll() is None:
             print("Reload request for", reason, "failed (already running)")
-            return  # still running — skip
-        print("Rebuilding:", reason)
-        _proc = subprocess.Popen("./run.sh", start_new_session=True)   
+        else:
+            print("Rebuilding:", reason)
+            _proc = subprocess.Popen("./run.sh", start_new_session=True)   
         global timer
         if timer is not None:
             timer.cancel()
-        timer = threading.Timer(1800, reload, args=["Timer"])
+        timer = threading.Timer(300, reload, args=["Timer"])
         timer.start()
 
 
